@@ -31,7 +31,7 @@ const drawer = (
                         <img src="/src/assets/user.png" alt="avatar" style={{ margin: 'auto', height: 36, width: 36 }} />
                     </IconButton>
                     <Box sx={{ marginLeft: 2 }}>
-                        <Box sx={{ fontSize: 12, fontWeight: 500 }}>
+                        <Box sx={{ fontSize: 12, fontWeight: 500, color: 'black' }}>
                             JOÃO VITOR FOGAÇA
                         </Box>
                         <Box sx={{ fontSize: 10, fontWeight: 500, color: '#23571b' }}>
@@ -74,6 +74,9 @@ const drawer = (
                 </ListItemButton>
             </ListItem>
         </List>
+        <Box sx={{ position: 'absolute', bottom: '0px', margin: '0px 0px 20px 75px' }}>
+            <img src="/src/assets/logo.png" alt="clinic-software logo" style={{ width: 80, height: 90 }} />
+        </Box>
     </div>
 )
 
@@ -116,10 +119,8 @@ export default function Layout(props: Props) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap component="div">
-                        Odonto CRM
-                    </Typography>
-                    <IconButton color="inherit">
+                    <Box />
+                    <IconButton sx={{ color: 'white' }}>
                         <ExitToApp />
                     </IconButton>
                 </Toolbar>
@@ -166,9 +167,7 @@ export default function Layout(props: Props) {
                     background: '#f8f8f8',
                 }}
             >
-                <Card sx={{ p: 2 }}>
-                    <Outlet />
-                </Card>
+                <Outlet />
             </Box>
         </Box>
     )

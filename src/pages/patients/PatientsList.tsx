@@ -40,14 +40,14 @@ export const PatientsList = () => {
     ]
 
     return (
-        <>
+        <Card sx={{ p: 2 }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Typography variant="h6">Pacientes</Typography>
                 <Button
                     variant="contained"
-                    startIcon={<Add />}
+                    startIcon={<Add sx={{ color: 'white' }} />}
                     size="small"
-                    sx={{ textTransform: 'none' }}
+                    sx={{ textTransform: 'none', fontWeight: 600, color: 'white' }}
                 >
                     Adicionar
                 </Button>
@@ -60,6 +60,6 @@ export const PatientsList = () => {
                 rowHeight={50}
                 sx={{ margin: '1rem 0', height: 450 }}
             />
-        </>
+        </Card>
     )
 }
