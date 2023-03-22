@@ -2,6 +2,7 @@ import { Link, Route, Routes } from "react-router-dom"
 
 import Layout from "../layout/Layout"
 import { Dashboard } from "../pages/dashboard/Dashboard";
+import { PatientsDetails } from "../pages/patients/PatientsDetails";
 import { PatientsList } from "../pages/patients/PatientsList"
 import { Schedule } from "../pages/schedule/Schedule";
 
@@ -23,6 +24,7 @@ export const AppRoutes = () => {
                 <Route index element={<PatientsList />} />
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="patients" element={<PatientsList />} />
+                <Route path="patients/:id/details" element={<PatientsDetails />} />
                 <Route path="schedule" element={<Schedule />} />
                 <Route path="*" element={<NoMatch />} />
             </Route>

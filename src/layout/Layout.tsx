@@ -173,9 +173,10 @@ export default function Layout(props: Props) {
                 component="main"
                 sx={{
                     flex: 1,
-                    p: 3,
+                    p: 2,
                     mt: 8,
-                    width: { sm: `calc(100% - ${drawerWidth}px)` },
+                    overflowY: 'scroll',
+                    // width: { sm: `calc(100% - ${drawerWidth}px)` },
                     height: 'auto',
                     background: '#f8f8f8',
                 }}

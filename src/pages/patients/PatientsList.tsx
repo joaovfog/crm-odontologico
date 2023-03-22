@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 import Add from "@mui/icons-material/Add"
 import Box from "@mui/material/Box"
@@ -35,8 +35,27 @@ export const PatientsList = () => {
     const columns: GridColDef[] = [
         {
             field: 'id',
-            headerName: 'ID',
-            width: 80
+            headerName: 'Código',
+            align: 'center',
+            headerAlign: 'center',
+            width: 80,
+            renderCell: (row) => {
+                return (
+                    <Link
+                        style={{
+                            textDecoration: 'none',
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            justifyItems: 'center',
+                            color: '#6eb6ff'
+                        }}
+                        to={`/patients/${row.id}/details`}
+                    >
+                        <div style={{ height: 16, fontWeight: 500 }}>{row.value}</div>
+                    </Link>
+                )
+            }
         },
         {
             field: 'firstName',
