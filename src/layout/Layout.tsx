@@ -1,12 +1,23 @@
+import { useState } from "react";
+import { Link, Outlet } from "react-router-dom";
+
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from '@mui/material/Toolbar'
-import MenuIcon from '@mui/icons-material/Menu'
-
-import { useState } from "react";
+import AppBar from '@mui/material/AppBar'
+import Drawer from '@mui/material/Drawer'
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
+import ListItemButton from '@mui/material/ListItemButton'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import ListItemText from '@mui/material/ListItemText'
+import Box from '@mui/material/Box'
 import IconButton from "@mui/material/IconButton";
-import { AppBar, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography, Box, Button, Card } from "@mui/material";
-import { Dashboard, ExitToApp, InsertInvitation, People } from "@mui/icons-material";
-import { Link, Outlet } from "react-router-dom";
+
+import MenuIcon from '@mui/icons-material/Menu'
+import Dashboard from '@mui/icons-material/Dashboard'
+import ExitToApp from '@mui/icons-material/ExitToApp'
+import InsertInvitation from '@mui/icons-material/InsertInvitation'
+import People from '@mui/icons-material/People'
 
 const drawerWidth = 240
 
@@ -48,7 +59,7 @@ const drawer = (
                     <ListItemIcon>
                         <Dashboard />
                     </ListItemIcon>
-                    <Link to="/" style={{ textDecoration: 'none', fontFamily: 'Arial', fontWeight: 400, lineHeight: 1.5, color: '#000000DE' }}>
+                    <Link to="/dashboard" style={{ textDecoration: 'none', fontFamily: 'Arial', fontWeight: 400, lineHeight: 1.5, color: '#000000DE' }}>
                         <ListItemText primary="Dashboard" />
                     </Link>
                 </ListItemButton>
@@ -96,11 +107,13 @@ export default function Layout(props: Props) {
     const container = window !== undefined ? () => window().document.body : undefined
 
     return (
-        <Box sx={{
-            display: 'flex', flex: 1,
-            flexDirection: 'row',
-            height: '100vh'
-        }}>
+        <Box
+            sx={{
+                display: 'flex',
+                flex: 1,
+                flexDirection: 'row',
+                minHeight: '100vh'
+            }}>
             <CssBaseline />
             <AppBar
                 position="fixed"
@@ -115,7 +128,7 @@ export default function Layout(props: Props) {
                         aria-label="open drawer"
                         edge="start"
                         onClick={handleDrawerToggle}
-                        sx={{ mr: 2, display: { sm: 'none' } }}
+                        sx={{ mr: 2, display: { sm: 'none' }, color: '#fff' }}
                     >
                         <MenuIcon />
                     </IconButton>

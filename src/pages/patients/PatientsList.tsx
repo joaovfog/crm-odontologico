@@ -1,11 +1,17 @@
-import { Add } from "@mui/icons-material"
+import { useNavigate } from "react-router-dom"
+
+import Add from "@mui/icons-material/Add"
 import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"
 import Card from "@mui/material/Card"
+import CardContent from "@mui/material/CardContent"
 import Typography from "@mui/material/Typography"
 import { DataGrid, GridColDef } from "@mui/x-data-grid"
-
-const drawerWidth = 240
+import { useState } from "react"
+import { CreatePatientModal } from "./CreatePatientModal"
+import Edit from "@mui/icons-material/Edit"
+import Delete from "@mui/icons-material/Delete"
+import IconButton from "@mui/material/IconButton"
 
 const rows = [
     { id: '00001', firstName: 'Jon Tra Volta', phone: '(00) 00000-0000' },
@@ -20,6 +26,12 @@ const rows = [
 ]
 
 export const PatientsList = () => {
+    const [open, setOpen] = useState(false)
+
+    const handleOpenCreatePatientModal = () => {
+        setOpen(true)
+    }
+
     const columns: GridColDef[] = [
         {
             field: 'id',
@@ -37,29 +49,47 @@ export const PatientsList = () => {
             headerName: 'Telefone',
             width: 160
         },
+        {
+            field: 'actions',
+            align: 'center',
+            headerName: 'Ações',
+            headerAlign: 'center',
+            renderCell: () => {
+                return (
+                    <Box>
+                        <IconButton><Edit fontSize="small" color="primary" /></IconButton>
+                        <IconButton><Delete fontSize="small" color="error" /></IconButton>
+                    </Box>
+                )
+            }
+        }
     ]
 
     return (
-        <Card sx={{ p: 2 }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Typography variant="h6">Pacientes</Typography>
-                <Button
-                    variant="contained"
-                    startIcon={<Add sx={{ color: 'white' }} />}
-                    size="small"
-                    sx={{ textTransform: 'none', fontWeight: 600, color: 'white' }}
-                >
-                    Adicionar
-                </Button>
-            </Box>
-            <DataGrid
-                rows={rows}
-                columns={columns}
-                checkboxSelection
-                pageSizeOptions={[100]}
-                rowHeight={50}
-                sx={{ margin: '1rem 0', height: 450 }}
-            />
+        <Card>
+            <CardContent>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <Typography variant="h6">Pacientes</Typography>
+                    <Button
+                        variant="contained"
+                        startIcon={<Add sx={{ color: 'white' }} />}
+                        size="small"
+                        sx={{ textTransform: 'none', fontWeight: 600, color: 'white' }}
+                        onClick={handleOpenCreatePatientModal}
+                    >
+                        Adicionar
+                    </Button>
+                    <CreatePatientModal open={open} onClose={() => setOpen(false)} />
+                </Box>
+                <DataGrid
+                    rows={rows}
+                    columns={columns}
+                    checkboxSelection
+                    pageSizeOptions={[100]}
+                    rowHeight={50}
+                    sx={{ margin: '1rem 0', height: 450 }}
+                />
+            </CardContent>
         </Card>
     )
 }

@@ -1,97 +1,94 @@
-import { Add } from "@mui/icons-material";
+import Add from "@mui/icons-material/Add";
+import Delete from "@mui/icons-material/Delete";
+import Edit from "@mui/icons-material/Edit";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { Badge, BadgeProps, Calendar } from "antd"
-import { Dayjs } from "dayjs";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { useState } from "react";
+import { ScheduleAppointmentModal } from "./ScheduleAppointmentModal";
 
-const getListData = (value: Dayjs) => {
-    let listData;
-    switch (value.date()) {
-        case 25:
-            listData = [
-                {
-                    startDate: '09h:30',
-                    endDate: '10h:00',
-                    patientsName: 'Gabriel Furlan Fogaça',
-                    type: 'warning'
-                }
-            ]
-            break;
-        case 10:
-            listData = [
-                {
-                    startDate: '14h:30',
-                    endDate: '15h:00',
-                    patientsName: 'Tiago da Silva',
-                    type: 'success'
-                }
-            ];
-            break;
-        case 15:
-            listData = [
-                {
-                    startDate: '08h:30',
-                    endDate: '09h:00',
-                    patientsName: 'Dionatan Tietzmann',
-                    type: 'error'
-                }
-            ];
-            break;
-        default:
-    }
-    return listData || [];
-};
+const rows = [
+    { id: '00001', firstName: 'Jon Tra Volta', date: '18/03/2023', phone: '(00) 00000-0000' },
+    { id: '00002', firstName: 'Cersei Arya Ferrara', date: '18/03/2023', phone: '(00) 00000-0000' },
+    { id: '00003', firstName: 'Jaime Daenerys', date: '18/03/2023', phone: '(00) 00000-0000' },
+    { id: '00004', firstName: 'Arya Cersei', date: '18/03/2023', phone: '(00) 00000-0000' },
+    { id: '00005', firstName: 'Daenerys Ferrara', date: '18/03/2023', phone: '(00) 00000-0000' },
+    { id: '00006', firstName: 'Larissa Harvey', date: '18/03/2023', phone: '(00) 00000-0000' },
+    { id: '00007', firstName: 'Ferrara', date: '18/03/2023', phone: '(00) 00000-0000' },
+    { id: '00008', firstName: 'Rossini Jaime', date: '18/03/2023', phone: '(00) 00000-0000' },
+    { id: '00009', firstName: 'Harvey Daenerys', date: '18/03/2023', phone: '(00) 00000-0000' },
+]
 
 export const Schedule = () => {
-    const dateCellRender = (value: Dayjs) => {
-        const listData = getListData(value);
-        return (
-            <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
-                {listData.map((item) => (
-                    <>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <span>{item.startDate} - {item.endDate}</span>
-                            <span><Badge status={item.type as BadgeProps['status']} /></span>
-                        </Box>
-                        <Typography variant="caption" sx={{ fontWeight: 600 }}>{item.patientsName}</Typography>
-                    </>
-                ))}
-            </ul>
-        );
-    };
+    const [open, setOpen] = useState(false)
 
-    const getMonthData = (value: Dayjs) => {
-        if (value.month() === 8) {
-            return 1394;
+    const handleOpenScheduleAppointmentModal = () => {
+        setOpen(true)
+    }
+    
+    const columns: GridColDef[] = [
+        {
+            field: 'id',
+            headerName: 'ID',
+            width: 80
+        },
+        {
+            field: 'firstName',
+            headerName: 'Nome completo',
+            flex: 1,
+            minWidth: 200
+        },
+        {
+            field: 'date',
+            headerName: 'Data'
+        },
+        {
+            field: 'phone',
+            headerName: 'Telefone',
+            width: 160
+        },
+        {
+            field: 'actions',
+            align: 'center',
+            headerName: 'Ações',
+            headerAlign: 'center',
+            renderCell: () => {
+                return (
+                    <Box>
+                        <IconButton><Edit fontSize="small" color="primary" /></IconButton>
+                        <IconButton><Delete fontSize="small" color="error" /></IconButton>
+                    </Box>
+                )
+            }
         }
-    }
-
-    const monthCellRender = (value: Dayjs) => {
-        const num = getMonthData(value);
-        return num ? (
-            <div className="notes-month">
-                <section>{num}</section>
-                <span>Backlog number</span>
-            </div>
-        ) : null;
-    }
-
+    ]
 
     return (
-        <>
-            <Box sx={{ marginBottom: 2, display: 'flex', justifyContent: 'space-between' }}>
-                <Typography variant="h6">Agenda</Typography>
+        <Card sx={{ p: 2 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                <Typography variant="h6">Consultas</Typography>
                 <Button
                     variant="contained"
                     startIcon={<Add sx={{ color: 'white' }} />}
                     size="small"
                     sx={{ textTransform: 'none', fontWeight: 600, color: 'white' }}
+                    onClick={handleOpenScheduleAppointmentModal}
                 >
                     Adicionar
                 </Button>
+                <ScheduleAppointmentModal open={open} onClose={() => setOpen(false)} />
             </Box>
-            <Calendar dateCellRender={dateCellRender} monthCellRender={monthCellRender} />
-        </>
+            <DataGrid
+                rows={rows}
+                columns={columns}
+                checkboxSelection
+                pageSizeOptions={[100]}
+                rowHeight={50}
+                sx={{ margin: '1rem 0', height: 450 }}
+            />
+        </Card>
     )
 }

@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material'
+import { ptBR } from '@mui/x-date-pickers'
 
 export const muiTheme = createTheme({
     typography: {
@@ -8,6 +9,11 @@ export const muiTheme = createTheme({
     palette: {
         primary: {
             main: '#6eb6ff'
+        },
+        success: {
+            main: '#4F9B36'
         }
-    }
-})
+    },
+},
+    ptBR
+)
