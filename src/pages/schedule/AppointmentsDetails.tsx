@@ -5,6 +5,7 @@ import { Box, Chip, Grid, IconButton, Typography } from "@mui/material"
 import ArrowBack from "@mui/icons-material/ArrowBack"
 import { formatDate } from "../../utils"
 import ErrorOutline from "@mui/icons-material/ErrorOutline"
+import { AssignmentTurnedIn } from "@mui/icons-material"
 
 export const AppointmentsDetails = () => {
     const navigate = useNavigate()
@@ -12,7 +13,7 @@ export const AppointmentsDetails = () => {
 
     const { data: appointment } = useLoadAppointment(id)
 
-    const situation = appointment?.situation === "1" ? <Chip label="Aguardando confirmação" size="small" color="primary" sx={{ color: '#fff' }} icon={<ErrorOutline sx={{ mb: 0.2 }} />} /> : "outro"
+    const situation = appointment?.situation === ("Consulta de Rotina" || "Consulta de Acompanhamento" || "Consulta de Avaliação") ? <Chip label={appointment?.situation} size="small" color="primary" sx={{ color: '#fff' }} icon={<AssignmentTurnedIn sx={{ mb: 0.2 }} />} /> : <Chip label={appointment?.situation} size="small" color="warning" sx={{ color: '#fff' }} icon={<ErrorOutline sx={{ mb: 0.2 }} />} />
 
     console.log(appointment)
 

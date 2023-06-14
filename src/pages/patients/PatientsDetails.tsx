@@ -52,6 +52,11 @@ export const PatientsDetails = () => {
             renderCell: (row: any) => formatDate(row?.row?.date)
         },
         {
+            field: 'time',
+            headerName: 'Hora',
+            headerClassName: 'super-app-theme--header'
+        },
+        {
             field: 'situation',
             headerName: 'Situação',
             width: 200,
