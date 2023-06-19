@@ -70,7 +70,7 @@ const EditAppointmentModalProvided = ({ appointment, open, onClose }: any) => {
     }, [data, appointment])
 
     return (
-        <Modal open={open} onClose={() => onClose()}>
+        <Modal open={open} onClose={() => onClose()} sx={{ margin: { xs: 1 } }}>
             <Card
                 sx={{
                     position: 'absolute',
@@ -81,7 +81,7 @@ const EditAppointmentModalProvided = ({ appointment, open, onClose }: any) => {
                     borderRadius: '12px',
                     border: 'none',
                     width: { xs: '100%', sm: 700, md: 'auto' },
-                    height: { xs: 450, sm: 400, md: 480 }
+                    height: { xs: 630, sm: 400, md: 480 }
                 }}
             >
                 <CardContent>
@@ -104,43 +104,50 @@ const EditAppointmentModalProvided = ({ appointment, open, onClose }: any) => {
                             </IconButton>
                         </Box>
                     </Box>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12} md={12}>
-                            <SelectC name="patient" label="Nome do paciente" getOptionLabel={(option: any) => option?.name} options={patients || []} />
+                    <Box
+                        sx={{
+                            height: { xs: 490, sm: 670, md: 'auto' },
+                            padding: '10px 0 10px 0'
+                        }}
+                    >
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} md={12}>
+                                <SelectC name="patient" label="Nome do paciente" getOptionLabel={(option: any) => option?.name} options={patients || []} />
+                            </Grid>
+                            <Grid item xs={12} md={12}>
+                                <SelectC
+                                    name="situation"
+                                    label="Situação"
+                                    getOptionLabel={(option) => option.name}
+                                    options={appointmentSituations || []}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6} md={6}>
+                                <DatePickerC
+                                    name="date"
+                                    label="Data"
+                                    inputFormat="dd/MM/yyyy"
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6} md={6}>
+                                <TextFieldC
+                                    name="time"
+                                    label="Horário"
+                                    placeholder="00:00:00"
+                                    sx={{ width: '100%' }}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextFieldC
+                                    name="observation"
+                                    label="Observação"
+                                    multiline
+                                    rows={4}
+                                    sx={{ width: '100%' }}
+                                />
+                            </Grid>
                         </Grid>
-                        <Grid item xs={12} md={12}>
-                            <SelectC
-                                name="situation"
-                                label="Situação"
-                                getOptionLabel={(option) => option.name}
-                                options={appointmentSituations || []}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={6}>
-                            <DatePickerC
-                                name="date"
-                                label="Data"
-                                inputFormat="dd/MM/yyyy"
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={6}>
-                            <TextFieldC
-                                name="time"
-                                label="Horário"
-                                placeholder="00:00:00"
-                                sx={{ width: '100%' }}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextFieldC
-                                name="observation"
-                                label="Observação"
-                                multiline
-                                rows={4}
-                                sx={{ width: '100%' }}
-                            />
-                        </Grid>
-                    </Grid>
+                    </Box>
                 </CardContent>
                 <CardActions sx={{ display: 'flex', justifyContent: 'space-between', padding: '2px 16px 1px 16px' }}>
                     <Button

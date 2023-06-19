@@ -96,6 +96,7 @@ export const Schedule = () => {
             field: 'patientName',
             headerName: 'Nome do paciente',
             flex: 1,
+            minWidth: 170,
             headerClassName: 'super-app-theme--header',
         },
         {
@@ -116,7 +117,18 @@ export const Schedule = () => {
             headerName: 'Situação',
             width: 200,
             headerClassName: 'super-app-theme--header',
-            renderCell: (row: any) => row?.row?.situation === ("Consulta de Rotina" || "Consulta de Acompanhamento" || "Consulta de Avaliação") ? <Chip label={row?.row?.situation} size="small" color="primary" sx={{ color: '#fff' }} icon={<AssignmentTurnedIn sx={{ mb: 0.2 }} />} /> : <Chip label={row?.row?.situation} size="small" color="warning" sx={{ color: '#fff' }} icon={<ErrorOutline sx={{ mb: 0.2 }} />} />
+            renderCell: (row: any) => {
+                const formatedDate = formatDate(row?.row?.date)
+                const today = new Date().toLocaleDateString()
+
+                if (formatedDate < today) {
+                    return (
+                        <Chip label="Consulta Atrasada" size="small" color="warning" sx={{ color: '#fff' }} />
+                    )
+                } else {
+                    return <Chip label={row?.row?.situation} size="small" color="primary" sx={{ color: '#fff' }} />
+                }
+            }
         },
         {
             field: 'actions',

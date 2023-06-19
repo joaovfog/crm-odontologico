@@ -37,7 +37,6 @@ export const Login = () => {
     const navigate = useNavigate()
 
     const handleSubmit = async (values: FormValues) => {
-        console.log("Values: ", values)
         setError("")
 
         try {
@@ -61,7 +60,6 @@ export const Login = () => {
                 setError(err.response?.data.message)
             else if (err && err instanceof Error)
                 setError(err.message)
-            console.log()
         }
     };
 
@@ -78,7 +76,7 @@ export const Login = () => {
                     color: '#212B36',
                     zIndex: 0,
                     width: 300,
-                    p: 4
+                    p: 3
                 }}
             >
                 <IconButton size="small" color="inherit">
@@ -118,12 +116,12 @@ export const Login = () => {
                 sx={{
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'flex-end',
+                    justifyContent: 'center',
                     borderRadius: '5px',
                     border: 'none',
                     width: 365,
                     gap: 1,
-                    marginTop: 2
+                    mt: 2,
                 }}
             >
                 <Typography variant="caption" sx={{ color: 'gray' }}>

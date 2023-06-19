@@ -1,6 +1,4 @@
 import ArrowBack from "@mui/icons-material/ArrowBack"
-import Check from "@mui/icons-material/Check"
-import ErrorOutline from "@mui/icons-material/ErrorOutline"
 import Box from "@mui/material/Box"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
@@ -12,8 +10,8 @@ import Typography from "@mui/material/Typography"
 import { GridColDef } from "@mui/x-data-grid"
 import { DataGrid } from "@mui/x-data-grid/DataGrid"
 import { useNavigate, useParams } from "react-router-dom"
-import { useLoadPatient, useLoadPatientAddresses } from "./hooks"
-import { cepMask, cnpjCpfMask, formatDate, phoneMask } from "../../utils"
+import { useLoadPatient, useLoadPatientAddresses, useLoadPatientAppointments } from "./hooks"
+import { cnpjCpfMask, formatDate, phoneMask } from "../../utils"
 import { useState } from "react"
 import Button from "@mui/material/Button"
 import Add from "@mui/icons-material/Add"
@@ -25,12 +23,9 @@ export const PatientsDetails = () => {
 
     const { data: patient } = useLoadPatient(id)
     const { data: patientAddresses, isFetching, isLoading } = useLoadPatientAddresses(id)
+    const { data: patientAppointments, isFetching: appointmentsFetching, isLoading: appointmentsLoading } = useLoadPatientAppointments(id)
 
     const [open, setOpen] = useState(false)
-
-    console.log(patientAddresses)
-
-    const appointment = patient?.appointments?.map((appointment: any) => appointment) || []
 
     const handleOpenCreatePatientAddressModal = () => {
         setOpen(true)
@@ -40,14 +35,22 @@ export const PatientsDetails = () => {
         {
             field: 'appointmentId',
             headerName: 'Código',
+            headerAlign: 'center',
+            align: 'center',
             width: 80,
             headerClassName: 'super-app-theme--header',
         },
         {
+            field: 'situation',
+            headerName: 'Situação',
+            flex: 1,
+            minWidth: 200,
+            headerClassName: 'super-app-theme--header',
+            renderCell: (row: any) => <Chip label={row?.row?.situation} size="small" color="primary" sx={{ color: '#fff' }} />
+        },
+        {
             field: 'date',
             headerName: 'Data',
-            flex: 1,
-            minWidth: 130,
             headerClassName: 'super-app-theme--header',
             renderCell: (row: any) => formatDate(row?.row?.date)
         },
@@ -55,23 +58,6 @@ export const PatientsDetails = () => {
             field: 'time',
             headerName: 'Hora',
             headerClassName: 'super-app-theme--header'
-        },
-        {
-            field: 'situation',
-            headerName: 'Situação',
-            width: 200,
-            headerClassName: 'super-app-theme--header',
-            renderCell: (row) => {
-                if (row?.row?.situation === '1') {
-                    return (
-                        <Chip label="Aguardando confirmação" size="small" color="primary" sx={{ color: '#fff' }} icon={<ErrorOutline sx={{ mb: 0.2 }} />} />
-                    )
-                } else {
-                    return (
-                        <Chip label="Confirmada" size="small" color="success" icon={<Check />} />
-                    )
-                }
-            }
         }
     ]
 
@@ -213,28 +199,6 @@ export const PatientsDetails = () => {
                                         )}
                                     </Grid>
                                 </CardContent>
-                                {/* <Divider />
-                                {patient?.addresses.length >= 1 ? (
-                                    <DataGrid
-                                        rows={patient?.addresses || []}
-                                        getRowId={(row: any) => row.addressId}
-                                        columns={addressColumns}
-                                        pageSizeOptions={[100]}
-                                        rowHeight={45}
-                                        sx={{
-                                            margin: '0.5rem 0',
-                                            height: { xs: 480, sm: 550, md: 195 },
-                                            flexGrow: 1,
-                                            minHeight: '100%',
-                                            backgroundColor: '#fff',
-                                            border: 'none'
-                                        }}
-                                    />
-                                ) : (
-                                    <Box sx={{ p: 2 }}>
-                                        <Typography variant="body2" color="grey">Não há endereço(s) cadastrado para este paciente...</Typography>
-                                    </Box>
-                                )} */}
                             </Card>
                         </Grid>
                     </Grid>
@@ -251,17 +215,17 @@ export const PatientsDetails = () => {
                         <CardContent>
                             <Typography sx={{ fontSize: 21, fontWeight: 500 }}>Histórico de consultas</Typography>
                         </CardContent>
-                        {/* <Divider /> */}
                         <Box sx={{
                             '& .super-app-theme--header': {
                                 backgroundColor: '#f4f6f8',
                             }
                         }}>
                             <DataGrid
-                                rows={appointment || []}
+                                rows={patientAppointments || []}
                                 getRowId={(row: any) => row.appointmentId}
                                 columns={columns}
                                 pageSizeOptions={[100]}
+                                loading={appointmentsLoading || appointmentsFetching}
                                 rowHeight={50}
                                 sx={{ height: 504 }}
                             />

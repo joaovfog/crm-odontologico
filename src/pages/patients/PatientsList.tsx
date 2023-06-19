@@ -1,5 +1,4 @@
-import { Link, useLocation } from "react-router-dom"
-
+import { Link } from "react-router-dom"
 import Add from "@mui/icons-material/Add"
 import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"
@@ -56,7 +55,6 @@ export const PatientsList = () => {
     const [open, setOpen] = useState(false)
     const [selectedPatient, setSelectedPatient] = useState(false)
     const [isEditPatientOpen, setIsEditPatientOpen] = useState(false)
-    const path = useLocation()
 
     const { data: patients, isLoading: patientsLoading, isFetching: patientsFetching } = useLoadPatients({})
     const { mutate: deletePatient } = useDeletePatient()
@@ -64,8 +62,6 @@ export const PatientsList = () => {
     const handleOpenCreatePatientModal = () => {
         setOpen(true)
     }
-
-    console.log(patients)
 
     const columns: GridColDef[] = [
         {
@@ -114,7 +110,6 @@ export const PatientsList = () => {
             headerAlign: 'center',
             headerClassName: 'super-app-theme--header',
             renderCell: (row) => {
-                const hasPatientInTheUrl = path.pathname === '/' ? `patients/${row?.row?.patientId}/edit` : `${row?.row?.patientId}/edit`
                 return (
                     <Box>
                         <IconButton

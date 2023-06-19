@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from '@mui/material/Toolbar'
@@ -49,19 +49,17 @@ const Main = styled('div')(({ theme }) => ({
 export default function Layout(props: Props) {
     const { window, children } = props
 
+    const container = window !== undefined ? () => window().document.body : undefined
+
     const signOut = useSignOut()
     const authUser = useAuthUser()
     const navigate = useNavigate()
-
-    console.log(authUser())
 
     const [mobileOpen, setMobileOpen] = useState(false);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     }
-
-    const container = window !== undefined ? () => window().document.body : undefined
 
     const logout = () => {
         signOut()
@@ -92,9 +90,6 @@ export default function Layout(props: Props) {
                             <Box sx={{ fontSize: 12, fontWeight: 500, color: 'black' }}>
                                 {authUser()?.username}
                             </Box>
-                            {/* <Box sx={{ fontSize: 10, fontWeight: 500, color: '#23571b' }}>
-                                Administrador
-                            </Box> */}
                         </Box>
                     </Box>
                 </Box>

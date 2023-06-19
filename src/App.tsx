@@ -12,7 +12,6 @@ import { GuestRoutes } from './routes/GuestRoutes'
 
 function App() {
   const isUserAuthenticated = useIsAuthenticated()
-  console.log(isUserAuthenticated())
 
   return (
     <LocalizationProvider localeText={ptBR.components.MuiLocalizationProvider.defaultProps.localeText} dateAdapter={AdapterDateFns}>

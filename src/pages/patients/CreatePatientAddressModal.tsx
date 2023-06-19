@@ -76,8 +76,8 @@ export const CreatePatientAddressModal = ({ open, onClose }: any) => {
                     transform: 'translate(-50%, -50%)',
                     borderRadius: '5px',
                     border: 'none',
-                    width: { xs: '100%', sm: 700, md: 400 },
-                    height: { xs: 700, sm: 830, md: 'auto' }
+                    width: { xs: '100%', sm: 700, md: 700 },
+                    height: { xs: 640, sm: 830, md: 520 }
                 }}
             >
                 <CardContent>
@@ -102,7 +102,7 @@ export const CreatePatientAddressModal = ({ open, onClose }: any) => {
                     </Box>
                     <Box
                         sx={{
-                            height: { xs: 550, sm: 670, md: 'auto' },
+                            height: { xs: 490, sm: 670, md: 'auto' },
                             padding: '10px 0 10px 0'
                         }}
                     >

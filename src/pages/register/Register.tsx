@@ -44,7 +44,6 @@ export const Register = () => {
             type: data.type?.id
         }
 
-        console.log(userData)
         mutateAsync(userData)
     }
 
@@ -61,7 +60,7 @@ export const Register = () => {
                     color: '#212B36',
                     zIndex: 0,
                     width: 300,
-                    p: 4
+                    p: 3
                 }}
             >
                 <IconButton size="small" color="inherit">

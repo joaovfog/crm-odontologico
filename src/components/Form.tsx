@@ -27,7 +27,7 @@ export const Form = <
         mode: 'onChange',
         resolver: schema && yupResolver(schema)
     })
-    console.log(methods.formState.errors)
+
     return (
         <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)} id={id}>

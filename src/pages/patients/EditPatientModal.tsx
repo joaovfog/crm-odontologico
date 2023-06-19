@@ -113,7 +113,7 @@ const EditPatientModalProvided = ({ patient, open, onClose }: any) => {
     ]
 
     return (
-        <Modal open={open} onClose={() => onClose()}>
+        <Modal open={open} onClose={() => onClose()} sx={{ margin: { xs: 1 } }}>
             <Card
                 sx={{
                     position: 'absolute',
@@ -123,7 +123,7 @@ const EditPatientModalProvided = ({ patient, open, onClose }: any) => {
                     borderRadius: '5px',
                     border: 'none',
                     width: { xs: '100%', sm: 700, md: 700 },
-                    height: { xs: 700, sm: 600, md: 500 }
+                    height: { xs: 700, sm: 830, md: 520 }
                 }}
             >
                 <CardContent>
@@ -181,57 +181,6 @@ const EditPatientModalProvided = ({ patient, open, onClose }: any) => {
                                     sx={{ width: '100%' }}
                                 />
                             </Grid>
-                            {/* <Grid item xs={12} display={'flex'} justifyContent={'space-between'}>
-                                <div></div>
-                                <Button
-                                    variant="contained"
-                                    startIcon={<Add sx={{ color: 'white' }} />}
-                                    sx={{ textTransform: 'none', fontWeight: 600, color: 'white' }}
-                                    onClick={() => {
-                                        handleOpenAddressModal()
-                                        setSelectedPatient(data)
-                                    }}
-                                    size="small"
-                                >
-                                    Endereço
-                                </Button>
-                                {openAddressModal && (
-                                    <CreatePatientAddressModal
-                                        open={openAddressModal}
-                                        onClose={() => setOpenAddressModal(false)}
-                                        patient={selectedPatient}
-                                    />
-                                )}
-                            </Grid>
-                            <Grid item xs={12}>
-                                {data?.addresses.length >= 1 ? (
-                                    <Box sx={{
-                                        '& .super-app-theme--header': {
-                                            backgroundColor: '#f4f6f8',
-                                        }
-                                    }}>
-                                        <DataGrid
-                                            rows={userAddresses || []}
-                                            getRowId={(row: any) => row.addressId}
-                                            columns={columns}
-                                            pageSizeOptions={[100]}
-                                            rowHeight={45}
-                                            sx={{
-                                                margin: '0.5rem 0',
-                                                height: { xs: 480, sm: 550, md: 200 },
-                                                flexGrow: 1,
-                                                minHeight: '100%',
-                                                backgroundColor: '#fff',
-                                                border: 'none'
-                                            }}
-                                        />
-                                    </Box>
-                                ) : (
-                                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                        <Typography variant="body2">Nenhum endereço cadastrado para este paciente...</Typography>
-                                    </Box>
-                                )}
-                            </Grid> */}
                         </Grid>
                     </Box>
                 </CardContent>
