@@ -46,7 +46,18 @@ export const PatientsDetails = () => {
             flex: 1,
             minWidth: 200,
             headerClassName: 'super-app-theme--header',
-            renderCell: (row: any) => <Chip label={row?.row?.situation} size="small" color="primary" sx={{ color: '#fff' }} />
+            renderCell: (row: any) => {
+                const formatedDate = formatDate(row?.row?.date)
+                const today = new Date().toLocaleDateString()
+
+                if (formatedDate < today) {
+                    return (
+                        <Chip label="Consulta Atrasada" size="small" color="warning" sx={{ color: '#fff' }} />
+                    )
+                } else {
+                    return <Chip label={row?.row?.situation} size="small" color="primary" sx={{ color: '#fff' }} />
+                }
+            }
         },
         {
             field: 'date',
