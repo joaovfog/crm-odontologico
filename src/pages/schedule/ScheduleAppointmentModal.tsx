@@ -84,7 +84,7 @@ export const ScheduleAppointmentModal = ({ open, onClose }: any) => {
                 borderRadius: '12px',
                 border: 'none',
                 width: { xs: '100%', sm: 700, md: 'auto' },
-                height: { xs: 630, sm: 400, md: 480 }
+                height: { xs: 630, sm: 400, md: 500 }
             }}>
                 <CardContent>
                     <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row', marginBottom: '.5rem' }}>

@@ -73,7 +73,7 @@ export const CreatePatientModal = ({ open, onClose }: any) => {
                 borderRadius: '5px',
                 border: 'none',
                 width: { xs: '100%', sm: 700, md: 700 },
-                height: { xs: 700, sm: 830, md: 520 }
+                height: { xs: 700, sm: 830, md: 510 }
             }}>
                 <CardContent>
                     <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row', marginBottom: '.5rem' }}>

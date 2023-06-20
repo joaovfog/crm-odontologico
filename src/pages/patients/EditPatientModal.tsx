@@ -123,7 +123,7 @@ const EditPatientModalProvided = ({ patient, open, onClose }: any) => {
                     borderRadius: '5px',
                     border: 'none',
                     width: { xs: '100%', sm: 700, md: 700 },
-                    height: { xs: 700, sm: 830, md: 520 }
+                    height: { xs: 700, sm: 830, md: 500 }
                 }}
             >
                 <CardContent>
